@@ -22,4 +22,3 @@ def before_request():
             g.token = token
             g.username = user_info.get('username')
             g.uid = user_info.get('uid')
-            g.phone_number = user_info.get('phone_number')
