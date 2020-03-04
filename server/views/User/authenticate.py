@@ -2,7 +2,7 @@ from server import api, redis
 from flask_restful import Resource
 from flask import request, g
 from server.models import User
-from server.views.User.encrytion import convert_to_md5
+from server.utils.encrytion import convert_to_md5
 
 import time
 
