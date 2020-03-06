@@ -1,6 +1,4 @@
 /server/__pycache__
 /.idea
-/server/urtils/__pycache__
-/server/views/__pycache__
-/server/views/User/__pycache__
-/server/views/File/__pycache__
+/server/*/__pycache__
+/server/views/*/__pycache__

@@ -14,6 +14,6 @@ api = Api(app)
 redis = RedisConn()
 
 from server import commands
-from server import interceptor
+from server.interceptor import intercept
 from server.views.User import authenticate, info
 from server.views.File import download, uploads
