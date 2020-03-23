@@ -1,11 +1,12 @@
 import redis
 import json
+from server import app
 
 
 class RedisConn:
 
     def __init__(self):
-        self.redis_conn = redis.Redis(host = 'localhost', port = '6379')
+        self.redis_conn = redis.Redis(host = app.config['REDIS_HOSTNAME'], port = app.config['REDIS_PORT'])
 
     def set(self, key, value, ex = 604800):
         self.redis_conn.set(key, json.dumps(value), ex = ex)

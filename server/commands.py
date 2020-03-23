@@ -4,13 +4,13 @@ import click
 from server import app, db
 from server.models import User
 from faker import Faker
-from random import randint
+from server.utils.encrytion import convert_to_md5
 
 
 @app.cli.command()
 @click.option('--drop', is_flag = True, help = 'Create after drop.')
 def initdb(drop):
-    """Initialize the database."""
+    """初始化数据库"""
     if drop:
         click.confirm('This operation will delete the database, do you want to continue?', abort = True)
         db.drop_all()
@@ -26,7 +26,7 @@ def initdata():
     for _ in range(10):
         new_user = User(
             username = fake.name(),
-            password = str(randint(10000, 99999))
+            password = convert_to_md5('adminadmin')
         )
         db.session.add(new_user)
     db.session.commit()
