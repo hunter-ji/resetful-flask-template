@@ -25,6 +25,9 @@ class RedisConn:
     def incr(self, key):
         self.redis_conn.incr(key)
 
+    def exits(self, key):
+        return self.redis_conn.exists(key)
+
 
 if __name__ == '__main__':
     red = RedisConn()
