@@ -13,7 +13,7 @@ def before_request():
         # 获取token来获取存储的详细用户信息
         token = request.args.get('token')
 
-        if not token:
+        if not token or redis.exits(token):
             return {
                 'code': 50008
             }
