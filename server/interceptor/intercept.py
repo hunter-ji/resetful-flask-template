@@ -17,6 +17,11 @@ def before_request():
             return {
                 'code': 50008
             }
+        elif not redis.exits(token):
+            return {
+                'code':    50008,
+                'message': '验证码过期,请重新登录'
+            }
         else:
             user_info = redis.get(token)
             g.token = token
