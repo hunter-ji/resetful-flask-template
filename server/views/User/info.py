@@ -6,17 +6,12 @@ from flask import request, g
 
 class UserInfo(Resource):
 
-    def option(self):
-        return {
-            'code': 20000
-        }
-
     # 用户信息
     def get(self):
         user_info = User.query.filter_by(uid = g.uid).first()
         return {
-            'uid':               user_info.uid,
-            'username':          user_info.username
+            'uid':      user_info.uid,
+            'username': user_info.username
         }
 
     # 信息修改
@@ -24,7 +19,7 @@ class UserInfo(Resource):
         data = request.get_json()
         username = data.get('username')
 
-        user_info = User.query.filter_by(uid=g.uid).first()
+        user_info = User.query.filter_by(uid = g.uid).first()
         user_info.username = username
 
         db.session.commit()

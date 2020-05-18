@@ -9,11 +9,6 @@ import os
 
 class Uploads(Resource):
 
-    def option(self):
-        return {
-            'code': 20000
-        }
-
     def post(self):
         file = request.files['file']
         file_type = secure_filename(file.filename).split('.')[-1]

@@ -7,11 +7,6 @@ from server.utils.encrytion import convert_to_md5
 
 class ChangePass(Resource):
 
-    def option(self):
-        return {
-            'code': 20000
-        }
-
     # 更换密码
     def post(self):
         data = request.get_json(force = True)
@@ -21,7 +16,7 @@ class ChangePass(Resource):
         user_info = User.query.fileter_by(uid = g.uid).first()
         if old_pass != user_info.password:
             return {
-                'code': 50008,
+                'code':    50008,
                 'message': '原密码不对'
             }
 

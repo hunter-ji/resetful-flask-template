@@ -23,6 +23,11 @@ def before_request():
                 'message': '验证码过期,请重新登录'
             }
         else:
+            if request.method == 'OPTIONS':
+                return {
+                    'code': 20000
+                }
+
             user_info = redis.get(token)
             g.token = token
             g.username = user_info.get('username')

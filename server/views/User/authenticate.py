@@ -9,11 +9,6 @@ import time
 
 class Login(Resource):
 
-    def option(self):
-        return {
-            'code': 20000
-        }
-
     def post(self):
         data = request.get_json()
         username = data.get('username')
@@ -53,11 +48,6 @@ class Login(Resource):
 
 
 class Logout(Resource):
-
-    def option(self):
-        return {
-            'code': 20000
-        }
 
     def post(self):
         redis.delete(g.token)

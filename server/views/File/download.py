@@ -8,11 +8,6 @@ import os
 
 class Download(Resource):
 
-    def option(self):
-        return {
-            'code': 20000
-        }
-
     # url下载
     def get(self, filename):
         return send_from_directory(os.path.join(app.root_path, 'uploads'), filename)
