@@ -1,6 +1,6 @@
 from server import api, redis
-from flask_restful import Resource
-from flask import request, g
+from flask_restful import Resource, reqparse
+from flask import g
 from server.models import User
 from server.utils.encrytion import convert_to_md5
 
@@ -10,24 +10,27 @@ import time
 class Login(Resource):
 
     def post(self):
-        data = request.get_json()
-        username = data.get('username')
-        password = convert_to_md5(data.get('password'))
+        parse = reqparse.RequestParser()
+        parse.add_argument('username', type = str, required = True)
+        parse.add_argument('password', type = str, required = True)
+        args = parse.parse_args()
+
+        password = convert_to_md5(args.password)
 
         # 查询是否为已注册用户
         user_info_check = User.query.filter_by(
-            username = username,
+            username = args.username,
             password = password
         ).first()
         if not user_info_check:
             return {
-                'code':    40001,
+                'code':    20001,
                 'message': '不存在该用户'
             }
 
         # 加密信息获取token
         token = convert_to_md5('{0}true{1}false{2}'.format(
-            username,
+            args.username,
             password,
             str(time.time())
         ))
@@ -52,7 +55,7 @@ class Logout(Resource):
     def post(self):
         redis.delete(g.token)
         return {
-            'code': 2000
+            'code': 20000
         }
 
 

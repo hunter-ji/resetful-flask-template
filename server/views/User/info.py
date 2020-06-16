@@ -1,7 +1,7 @@
 from server import api, db
 from server.models import User
-from flask_restful import Resource
-from flask import request, g
+from flask_restful import Resource, reqparse
+from flask import g
 
 
 class UserInfo(Resource):
@@ -16,11 +16,12 @@ class UserInfo(Resource):
 
     # 信息修改
     def post(self):
-        data = request.get_json()
-        username = data.get('username')
+        parse = reqparse.RequestParser()
+        parse.add_argument('username', type = str, required = True)
+        args = parse.parse_args()
 
         user_info = User.query.filter_by(uid = g.uid).first()
-        user_info.username = username
+        user_info.username = args.username
 
         db.session.commit()
         return {
