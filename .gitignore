@@ -3,7 +3,7 @@
 /server/*/__pycache__
 /server/views/*/__pycache__
 
-/example
 /example/.idea
 /example/server/__pycache__
 /example/server/*/__pycache__
+/example/server/views/*/__pycache__
